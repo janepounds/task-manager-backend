@@ -48,3 +48,42 @@ This project is part of a full-stack Task Manager application.
 ```bash
 git clone https://github.com/janepounds/task-manager-backend.git
 cd task-manager-backend
+
+2. Configure Database
+Update src/main/resources/application.properties:
+spring.datasource.url=jdbc:postgresql://localhost:5432/taskdb
+spring.datasource.username=postgres
+spring.datasource.password=yourpassword
+spring.jpa.hibernate.ddl-auto=update
+
+3. Run the application
+mvn spring-boot:run
+
+API Endpoints
+| Method | Endpoint          | Description             |
+| ------ | ----------------- | ----------------------- |
+| GET    | `/api/tasks`      | Get all tasks           |
+| POST   | `/api/tasks`      | Create a new task       |
+| PUT    | `/api/tasks/{id}` | Update an existing task |
+| DELETE | `/api/tasks/{id}` | Delete a task           |
+
+Example POST Request
+{
+  "title": "Learn Spring Boot",
+  "description": "Understand basics",
+  "completed": false
+}
+
+🔗 Related Projects
+
+Android Frontend: Task Manager Android
+
+React Web Frontend: Task Manager Web
+
+🛠 Future Improvements
+
+Add user registration & authentication (JWT)
+
+Implement microservices (Auth + Tasks)
+
+Deploy to AWS with CI/CD
