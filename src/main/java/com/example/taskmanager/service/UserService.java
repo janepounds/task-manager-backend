@@ -19,13 +19,16 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User register(String username, String password) {
-        if (userRepository.findByUsername(username) != null) {
-            throw new RuntimeException("User already exists");
-        }
-        User user = new User();
-        return userRepository.save(user);
+  public User register(String username, String password) {
+    if (userRepository.findByUsername(username).isPresent()) {
+        throw new RuntimeException("User already exists");
     }
+    User user = new User();
+    user.setUsername(username);
+    user.setPassword(passwordEncoder.encode(password));
+    user.setRole("USER"); // default role
+    return userRepository.save(user);
+}
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);

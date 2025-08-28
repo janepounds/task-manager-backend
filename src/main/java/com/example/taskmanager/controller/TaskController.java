@@ -3,6 +3,8 @@ package com.example.taskmanager.controller;
 
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.repository.TaskRepository;
+
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +17,12 @@ public class TaskController {
 
     public TaskController(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
+    }
+
+    // Secured endpoint: only works if JWT is valid
+    @GetMapping("/api/tasks/hello")
+    public String hello(Authentication authentication) {
+        return "Hello " + authentication.name() + ", you are authenticated!";
     }
 
     @GetMapping
